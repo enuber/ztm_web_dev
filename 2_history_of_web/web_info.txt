@@ -1,0 +1,34 @@
+world wide web - a common language that computers can speak. 
+
+HTML, CSS and JS - are the way to communicate 
+
+essentially as an example internet is your phone and www is an app that runs on your phone.
+
+
+HTML - way to write text on a website. and give hyperlinks that can link to another site or share files
+CSS - gives style
+JS - helps give interactivity
+
+
+_________________________________
+
+multiple web browsers
+
+browsers need to agree on how to read html, css and js.
+
+
+_________________________________
+
+Developer History
+
+OLD
+
+Front End - HTML, CSS, JS, Jquery 
+
+Back End (LAMP - Linux, Apache, MySQL, PHP)
+
+NEWER
+
+HTML5, CSS3, JS + React
+
+Back end - Node.js, Express.js, PostgreSQL, MongoDB

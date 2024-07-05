@@ -1,0 +1,34 @@
+When we go to a site like google.com, it sends out a request to the ISP (internet service provider), they send the request to the DNS (domain name server). This request is like sending to a phone book, it has an address that looks like 172,.217.7.23. This gets sent back to the ISP who then sends it back to the browser.
+
+We get the IP address, we send off another request then with that address to the google servers because of the address. The servers are basically like computers. servers are computers that have a piece of software running that knows how to send you files when you request from them.
+
+So they send back the HTML, CSS and JS files to the browser so we can see the page as we expect. 
+
+If you knew the IP address to begin with you can use it to load the page. But this isn't feasible to know all the IP Addresses so it's handled for you.
+
+
+
+_________________________________
+
+The Internet Backbone -
+
+We usually have a wifi router and/or modem connected to the computer...
+modem sends signals to towers. These towers transmit the signals to the ISP network that is then connected to the "internet backbone", these are cables that actually go all over the world. 
+
+
+_________________________________
+
+Traceroute -
+
+can type 
+traceroute google.com //in the terminal and you will see the route it takes. 
+
+_________________________________
+
+funadmentals part 1
+
+how can you improve the speed without knowing anything else about coding...
+
+1. location of the server - 
+2. how many trips it takes - we saw this in traceroute
+3. size of files being transfered - 
