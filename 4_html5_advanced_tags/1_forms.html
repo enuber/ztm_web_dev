@@ -4,6 +4,53 @@
     <title>Register</title>
   </head>
   <body>
-    <form></form>
+    <header>
+      <h1>Register</h1>
+    </header>
+    <nav>
+      <a href="www.google.com">Google</a>
+    </nav>
+    <!-- div - divide...allows you to divide up the content.  -->
+    <div></div>
+    <!-- span does the same thing but is "inline" would add it to a specific line make it nice to be an invisible container that you want to style-->
+    <span></span>
+    <!-- required - makes a field required before can submit with basic form -->
+    <!-- radio buttons need a name="" in order for them to be grouped together -->
+    <!-- multiple on select allows you to select multiple inputs put it on the select tag -->
+    <!-- action - form attribute is old school way but allows you to tell it on submit what file to then run -->
+    <form>
+      First Name: <input type="text" name="firstname" /> <br />
+      Last Name: <input type="text" name="lastname" /> <br />
+      E-mail: <input type="email" name="email" required /> <br />
+      Password: <input type="password" minlength="5" name="password" required />
+      <br />
+      Birthday:<input type="date" name="bday" /><br /><br />
+
+      Gender: <br />
+      <input type="radio" name="gender" /> Male<br />
+      <input type="radio" name="gender" /> Female<br />
+      <input type="radio" name="gender" /> Other<br />
+      <br />
+
+      Pets: <br />
+      <input type="checkbox" name="cat" /> Cat <br />
+      <input type="checkbox" name="dog" /> Dog <br />
+      <br />
+
+      Cars: <br />
+      <select name="cars">
+        <option value="volvo">Volvo</option>
+        <option value="Audi">Audi</option>
+      </select>
+
+      <!-- GET - when you click submit on this form, it adds it into the url as query strings ?lastname=""&firstname=""&email=""... 
+      POST - will give you the info without putting it into the URL it is handled in the body 
+
+      -->
+
+      <br /><br /><input type="submit" value="Register !" />
+      <input type="reset" value="Reset" />
+    </form>
   </body>
+  <footer>Give the page a footer</footer>
 </html>

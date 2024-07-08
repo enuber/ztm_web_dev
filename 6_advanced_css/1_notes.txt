@@ -1,0 +1,22 @@
+Critical Render Path - when we go to our site, a request is made to the server which sends back the html file.  The browser reads the HTML document and, as it looks through it sees it needs a CSS file. So it sends a request to the server to ask for the CSS file which then gets sent back. Then it looks through both files and, it may see it needs a font from google API. So it request for that file. 
+
+While it is waiting for the font file, it could render the page before it gets it back. But the text may not show up if you are relying on fonts that need to be loaded as well.
+
+So CRP...CSS is a render blocking file. Sometimes font files are also render blocking so need to keep this in mind. 
+
+make it faster...
+1. have your own font files rather than calling for them
+2. don't have your css files be to big. 
+
+
+________________________________________
+
+css3 - latest interation of css. 
+
+https://www.w3schools.com/cssref/css3_browsersupport.php
+
+https://shouldiprefix.com/
+
+https://autoprefixer.github.io/
+
+https://caniuse.com/

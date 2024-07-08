@@ -1,0 +1,108 @@
+/* 
+
+follows this...
+
+Selector {
+  property: value;
+} 
+
+CSS = cascading style sheet 
+means always takes selector at the end. 
+  
+
+css-tricks - great site for learning about css, almanac lists all properties
+
+color picking site - https://paletton.com/#uid=1000u0kllllaFw0g0qFqFg0w0aF
+
+specificity calculator - https://specificity.keegan.st/
+
+*/
+/* 
+float was meant to be used for images to have text wrapping around it. "clear:both" to keep something on its own below a float 
+*/
+
+/* 
+box model ->  margin - border - padding - content
+*/
+/* 
+Absolute Units
+PX: Pixels (px) are considered absolute units, although they are relative to the DPI and resolution of the viewing device. But on the device itself, the PX unit is fixed and does not change based on any other element. Using PX can be problematic for responsive sites, but they are useful for maintaining consistent sizing for some elements. If you have elements that should not be resized, then using PX is a good choice.
+
+Relative Units
+EM: Relative to the parent element
+
+REM: Relative to the root element (HTML tag)
+
+%: Relative to the parent element
+
+VW: Relative to the viewport’s width
+
+VH: Relative to the viewport’s height
+
+Unlike PX, relative units like %, EM, and REM are better suited to responsive design and also help meet accessibility standards. Relative units scale better on different devices because they can scale up and down according to another element’s size.
+
+When Should You Use One Unit Over Another?
+Ultimately, there isn’t a perfect answer for this question. In general, it is often best to choose one of the relative units over PX so that your web page has the best chance of rendering a beautifully responsive design. Choose PX however, if you need to ensure that an element never resizes at any breakpoint and remains the same regardless of whether a user has chosen a different default size. PX units ensure consistent results even if that’s not ideal.
+
+EM is relative to the parent element’s font size, so if you wish to scale the element’s size based on its parent’s size, use EM.
+
+REM is relative to the root (HTML) font size, so if you wish to scale the element’s size based on the root size, no matter what the parent size is, use REM. If you’ve used EM and are finding sizing issues due to lots of nested elements, REM will probably be the better choice.
+
+VW is useful for creating full width elements (100%) that fill up the entire viewport’s width. Of course, you can use any percentage of the viewport’s width to achieve other goals, such as 50% for half the width, etc.
+
+VH is useful for creating full height elements (100%) that fill up the entire viewport’s height. Of course, you can use any percentage of the viewport’s height to achieve other goals, such as 50% for half the height, etc.
+
+% is similar to VW and VH but it is not a length that is relative to viewport’s width or height. Instead, it is a percentage of the parent element’s width or height. Percentage units are often useful to set the width of margins, as an example.
+
+*/
+
+* {
+  text-align: right;
+}
+
+body {
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+}
+
+h2 {
+  color: #aa4139;
+  text-align: center;
+  border: 5px solid rgba(255, 176, 170, 0.5);
+  padding: 10px;
+  cursor: pointer;
+}
+
+p {
+  color: pink;
+  line-height: 20px;
+  font-style: italic;
+  font-weight: bold;
+}
+p {
+  color: green;
+}
+li {
+  list-style: none;
+  display: inline-block;
+}
+.webtext {
+  border: 5px dashed green;
+}
+.active {
+  color: red;
+}
+#div1 {
+  background-color: rgba(0, 0, 255, 0.2);
+}
+
+.box_model {
+  border: 5px solid red;
+  display: inline-block;
+  padding: 5px 20px;
+  margin: 0 20px;
+}
+
+span {
+  font-size: 2em;
+}

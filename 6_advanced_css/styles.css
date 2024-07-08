@@ -1,0 +1,33 @@
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+/* https://flexboxfroggy.com/ */
+
+/* https://thoughtbot.com/blog/transitions-and-transforms */
+
+/* https://www.freecodecamp.org/learn/responsive-web-design/basic-css/ */
+
+h1 {
+  font-family: fantasy;
+  font-size: 3em;
+  border-bottom: 2px solid pink;
+  text-align: center;
+  width: 450px;
+  margin: 20px auto;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+img {
+  width: 450px;
+  height: 300px;
+  transition: all 1s;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
