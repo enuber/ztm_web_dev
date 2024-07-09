@@ -1,0 +1,168 @@
+<!-- GRID CHEATSHEET - https://grid.malven.co/ -->
+
+<!-- https://web.dev/learn/css/ -->
+
+<!-- CSS Grid is a powerful layout system in CSS that allows you to create complex, responsive web layouts with ease. It uses a two-dimensional grid-based approach, meaning you can control both columns and rows, making it suitable for creating web pages with intricate and flexible designs.
+
+Key Concepts of CSS Grid
+Grid Container: The element that serves as the container for the grid items. You define a grid container by setting its display property to grid or inline-grid.
+
+Grid Items: The direct children of the grid container. These items are automatically placed into the grid cells created by the container.
+
+Grid Lines: The horizontal and vertical lines that divide the grid into cells.
+
+Grid Tracks: The columns and rows of the grid.
+
+Grid Cell: The space between two adjacent row and two adjacent column grid lines.
+
+Grid Area: A rectangular space between four grid lines. It can span multiple cells.
+
+Basic Usage
+1. Defining a Grid Container
+You start by defining a grid container. For example:
+
+css
+Copy code
+.container {
+  display: grid;
+}
+
+2. Creating Columns and Rows
+You use the grid-template-columns and grid-template-rows properties to define the number and size of the columns and rows:
+
+css
+Copy code
+.container {
+  display: grid;
+  grid-template-columns: 100px 200px 100px; /* Three columns with specified widths */
+  grid-template-rows: auto 100px auto; /* Three rows with specified heights */
+}
+
+
+Alternatively, you can use repeat() to simplify your code:
+
+css
+Copy code
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns of equal width */
+  grid-template-rows: repeat(2, 200px); /* Two rows of equal height */
+}
+
+
+3. Placing Grid Items
+Grid items are placed automatically, but you can also specify their placement using properties like grid-column and grid-row:
+
+css
+Copy code
+.item1 {
+  grid-column: 1 / 3; /* Span from column line 1 to 3 */
+  grid-row: 1 / 2; /* Span from row line 1 to 2 */
+}
+
+Example
+Here is a simple example to illustrate the concepts:
+
+html
+Copy code
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid Example</title>
+  <style>
+    .container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+      grid-template-rows: 100px 200px; /* Two rows, first 100px, second 200px */
+      gap: 10px; /* Space between grid items */
+    }
+    .item {
+      background-color: lightblue;
+      padding: 20px;
+      text-align: center;
+    }
+    .item1 {
+      grid-column: 1 / 3; /* Span across the first two columns */
+    }
+    .item2 {
+      grid-row: 1 / 3; /* Span across the first two rows */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="item item1">Item 1</div>
+    <div class="item item2">Item 2</div>
+    <div class="item">Item 3</div>
+    <div class="item">Item 4</div>
+  </div>
+</body>
+</html>
+
+
+
+More Advanced Features
+Grid Template Areas: Define areas of the grid and place items into these areas by name.
+
+css
+Copy code
+.container {
+  display: grid;
+  grid-template-areas: 
+    'header header header'
+    'sidebar main main'
+    'footer footer footer';
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header {
+  grid-area: header;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.main {
+  grid-area: main;
+}
+.footer {
+  grid-area: footer;
+}
+Auto-placement: Let the browser automatically place grid items.
+
+css
+Copy code
+.container {
+  display: grid;
+  grid-auto-columns: 100px;
+  grid-auto-rows: 100px;
+}
+CSS Grid offers a flexible and powerful way to create complex and responsive layouts, making it an essential tool for modern web development.
+
+
+
+In CSS Grid, you can use the justify-items property to control the alignment of grid items along the inline (row) axis. This property can be applied to the grid container to set a default alignment for all items within the grid.
+
+justify-items Property
+The justify-items property accepts the following values:
+
+start: Aligns items to the start of their grid area (default).
+end: Aligns items to the end of their grid area.
+center: Aligns items to the center of their grid area.
+stretch: Stretches items to fill their grid area (default if no size is specified).
+
+
+
+In CSS Grid, the align-items property is used to control the alignment of grid items along the block (column) axis. This property can be applied to the grid container to set a default alignment for all items within the grid.
+
+align-items Property
+The align-items property accepts the following values:
+
+start: Aligns items to the start of their grid area.
+end: Aligns items to the end of their grid area.
+center: Aligns items to the center of their grid area.
+stretch: Stretches items to fill their grid area (default if no size is specified).
+
+ -->
