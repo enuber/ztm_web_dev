@@ -9,7 +9,7 @@ JAVASCRIPT TYPES
 2. String
 3. Boolean
 4. Undefined - variable has not been assigned. 
-5. Null
+5. Null - means there is nothing in the object 
 <!-- 6. Symbol (new in ECMAScript 6) -->
 7. Object
 
