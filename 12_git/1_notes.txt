@@ -1,0 +1,53 @@
+// source control - 
+
+// copy a project from git hub
+git clone url
+
+// shows files that have changes in red or green if they have been added but not committed
+git status
+
+
+// add files to the stage before commiting
+git add <filename> or .
+
+// after adding files you then commit them to get them ready with a message to put onto github
+git commit -m 'message'
+
+// push files to github
+git push origin master
+
+// if you are joining in on a project you clone the repo
+
+// when working on a project and you need to get latest changes
+git pull origin <branchname>
+
+// see branches
+git branch
+
+// change branch
+git switch <branchname>
+
+git checkout <branchname>
+
+//this creates and switches
+git switch -c <branchname>
+
+git checkout -b <branchname>
+
+// on a branch and want to merge another branch into it.
+git merge <branchname>
+
+when have a conflict will get 
+need to choose what you want to keep 
+
+<<<<<< HEAD
+this is your code in your current branch in this area in here
+===========
+this is the code being merged in from the branch you called.
+>>>>>>>>>>>>> master
+
+and then have to do 
+
+git add .
+git commit -m 'fixing merged issues'
+git push <branchname>
