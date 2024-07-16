@@ -1,0 +1,34 @@
+// this creates a package.json file
+npm init
+
+// get newest version of node
+visit the nodejs site and you can update from the downloads section using the Bash area. Need the LTS for the latest stable version.
+
+// globally or locally
+if local will only work in the project you are working
+-g global will work everywhere so will work from project to project 
+
+
+VIDEO - INSTALLING AND USING PACKAGES
+
+// this would be locally, will create a node_modules folder and add the correct material to the package.json folder. 
+
+ex:
+npm install lodash
+
+
+note: if require method is not working you may need to instal browserify
+
+npm install -g browserify
+
+to run browserify
+
+browserify script.js > bundle.js
+add the bundle.js file to html 
+
+dependencies vs dev-dependencies
+
+dev-dependencies are only for development, when the project is released those packages aren't needed to run anything on the page. 
+
+npm scripts allow you to write some code that will auto run like this will rebuild the script to bundle then load live-server
+build: 'browserify script.js > bundle.js && live-server'
