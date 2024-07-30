@@ -1,0 +1,44 @@
+Request: going to servers
+
+HTTP: only has a few terms 
+GET - get a file or get something
+POST - want to post or send something, add to a database
+PUT - update / edit something 
+DELETE - delete/remove 
+
+
+Response: coming back from servers
+
+200 - ok
+300 - redirection
+400 - problem
+
+basically get back a status code plus maybe an html doc.
+
+Network tab will give you information about the requests being made, will show the response back in status code and, the actual info that was sent back.
+
+
+GET - can be done with a query string which sends data as ?name='nameentered'=&lastname='nameentered' this is in the URL itself. This is not secure and not the best way to do this. 
+
+POST - send data through the body. you send as "form data". no longer displays in querystring. Also not overly secure for passwords. 
+
+Doing a call through HTTPS means that the "S" secure the data would be encrypted.
+
+either way you get the response code. 
+
+____________________
+
+can send data via JSON or XML, JSON data is standard though.
+
+JSON can be read by any service. We also receive data back via JSON
+
+JSON.parse() - if we had JSON, we can get the object 
+
+JSON.stringify() - can take an object and turn it into JSON
+
+____________________
+
+AJAX - allowed you to send data in the background and load info via AJAS without reloading the whole page. 
+
+AJAX was old way, now use FETCH
+
