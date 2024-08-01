@@ -1,0 +1,20 @@
+Back End 
+
+OLD WAY: - request and response just gives files back 
+LAMP Stack most basic Linux, Apache Server, MySQL DB and PHP - was really good at sending back files when requested but nothing overly complex.
+
+
+This was what hostgator was used for or wordpress, very basic. 
+
+
+Newer way: Application Server can write scripts. 
+ex: if you get a request to login, check the database of users and password, if info is same send a response back to front end. With Node.js we can use JS on a server on a computer that isn't running a web browser. 
+
+ex: facebook post, send a post that goes to the backend, the node.js and express.js file on the server will read the post and will understand how to handle it. Will send the JSON data to the database where it get stored for the future and pass back a response saying we got it and have it display.
+
+back end - node server (node.js, expres.js) db - postgresSQL, mongoDB
+
+
+big companies...
+
+load balancer that has several servrs going with Node.js and Express.js that all link to a MongoDB and PostgreSQL or something similar. So that it can handle the heavy traffic. These servers are likely in different countries, this makes everything faster but, its generally a copy/paste of the same files which is what scaling is. 
