@@ -1,0 +1,74 @@
+// node
+
+allows us to run JS in the terminal.
+
+there are some things not available. There is no document and no window. So as long as it's not browser based it can be done.
+
+to access node just type
+
+node <-- this in terminal.
+
+you will then get a new prompt
+>
+
+can run normal commands this way
+
+process and global are things beyond window and and document you can run
+
+global is very similar to window but there are things that it doesn't have mainly browser specific
+
+process - refers to what you are running right now in the terminal.
+
+to end node type
+process.exit()
+
+
+////////
+
+new feature from es2020 ----> globalThis
+
+when using it, it points to the window object.
+
+globalThis === window // true
+
+globalThis also works outside the browser. This means that we can use it in node.js. But it is the same as typing global for node.js. It has the same properties as global. 
+
+
+///// 
+modules in Node.js
+
+now has es6 style modules. can now use import/export
+
+in order to do this, need to add to the package.json file. 
+import statements of .js files are treated as ES modules if the nearest parent package.json contains "type" : "module"
+"type": "module"
+
+to create a package.json file can run npm init -y  (add in the -y to skip all the questions that setup the file)
+
+or::: will work either way
+
+give the files .mjs extension.
+
+////
+es2022
+
+const arr = [100, 200, 300, 400, 500, 600];
+arr[2] //300
+arr.at(2) //300
+
+arr[ar.length - 2] //500
+arr.at(-2) // 500
+
+async/await is not apart of es2022 just reminder that await relies on your using async 
+
+// Top-level await allows you to use the await keyword outside of async functions, directly in the main body of a module. This can be particularly useful for initializing your app, loading configurations, or fetching initial data without wrapping the code in an async function.
+// KEY TAKEAWAY top level await is useful only in modules. This means you don't need to use async in a module can just use await.
+
+try {
+  // Top-level await
+  const response = await fetchData('https://jsonplaceholder.typicode.com/posts/1');
+  const data = await response.json();
+} catch (error) {
+  console.error('Failed to fetch data:', error);
+  document.getElementById('data').textContent = 'Failed to fetch data';
+}
