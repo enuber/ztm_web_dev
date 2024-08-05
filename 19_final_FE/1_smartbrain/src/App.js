@@ -49,6 +49,33 @@ class App extends Component {
     boxes: [],
     route: 'signin',
     isSignedIn: false,
+    user: {
+      email: '',
+      id: '',
+      name: '',
+      entries: 0,
+      joined: '',
+    },
+  };
+
+  //may give you a CORS error, in order to run localhost and do this need ot install CORS into the node/expres server
+  // this is just showing it connects the server and we get back some data. This is based on both the server running as well as this app running.
+  // componentDidMount() {
+  //   fetch('http://localhost:3000/')
+  //     .then((res) => res.json())
+  //     .then((data) => console.log(data));
+  // }
+
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        entries: data.entries,
+        joined: data.joined,
+      },
+    });
   };
 
   onInputChange = (evt) => {
@@ -85,7 +112,25 @@ class App extends Component {
       returnClarafiaRequestOptions(this.state.input)
     )
       .then((response) => response.json())
-      .then((data) => this.displayFaceBox(this.calculateFaceLocation(data)))
+      .then((data) => {
+        if (data) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: this.state.user.id }),
+          })
+            .then((res) => res.json())
+            .then((count) => {
+              this.setState((prevState) => ({
+                user: {
+                  ...prevState.user,
+                  entries: count,
+                },
+              }));
+            });
+        }
+        this.displayFaceBox(this.calculateFaceLocation(data));
+      })
       .catch((error) => console.log('error', error));
   };
 
@@ -110,7 +155,10 @@ class App extends Component {
         {route === 'home' ? (
           <>
             <Logo />
-            <Rank />
+            <Rank
+              name={this.state.user.name}
+              entries={this.state.user.entries}
+            />
             <ImageLinkForm
               onInputChange={this.onInputChange}
               input={input}
@@ -119,9 +167,12 @@ class App extends Component {
             <FaceRecognition boxes={boxes} imageURL={imageURL} />
           </>
         ) : route === 'signin' ? (
-          <Signin onRouteChange={this.onRouteChange} />
+          <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register
+            onRouteChange={this.onRouteChange}
+            loadUser={this.loadUser}
+          />
         )}
       </div>
     );
