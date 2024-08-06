@@ -1,0 +1,120 @@
+use a gui for postgreSQL
+
+go to www.psequel.com
+
+install with brew
+
+do first...
+
+brew udpate
+brew doctor 
+
+brew install postgresql 
+
+to start install
+brew services start postgresql
+
+to stop
+brew services stop postgresql
+
+to create a databse
+
+createdb '<filename>'
+
+//in terminal can do this. Can do this instead of GUI
+psql '<filename>'
+
+
+NOTE the semi-colon is important!!!!
+column_1 - refers to what you want to name the table
+datatype refers to what type of data the column should hold. string, numeric, date/time
+values the value to insert into each column
+
+//CREATE A TABLE
+CREATE TABLE table_name (column_1 datatype, column_2 datatype, column_3 datatype);
+
+// INSERT INTO TABLE
+INSERT INTO table_name (column_1, column_2, column_3) VALUES (value_1, value_2, value_3);
+
+//  INSERT INTO users (name, age, birthday) VALUES ('John', '32', '1998-6-10');
+
+// GET INFO
+// * - wild card meaning all
+SELECT name, age, birthday FROM users;
+SELECT * FROM users;
+
+// ALTER TABLE - change info in table
+ALTER TABLE table_name ADD column_name datatype;
+ALTER TABLE users ADD score smallint;
+
+
+// UPDATE 
+UPDATE table_name
+SET column_name = value
+WHERE column_name = value;
+
+//will update a specific user (note: single quotes)
+ex: UPDATE users SET score = 0 WHERE name='John' OR name='Sally';
+
+
+//CONDITIONALS - 
+// like creates a conditional, E% means starting with E and can have anything after. Case sensitive can reverse and do %k for ending with k
+SELECT * FROM users WHERE name LIKE 'E%';
+
+
+// ORDER BY - can create order in the list
+// DESC / ASC - Descending and Ascending
+SELECT * FROM users ORDER BY score DESC;
+
+
+// FUNCTIONS
+// AVG() - allows you to find the avg based on a column
+SELECT AVG(score) FORM users;
+
+// SUM() - allows you to add numbers
+SELECT AVG(age) FROM users;
+
+// COUNT() - count a column
+SELECT COUNT(name) FROM users;
+
+/*
+// serial - datatype auto increments, so will give unique numbers
+// NOT NULL - has to be a filled in property, can not be null ie not filled in.
+// PRIMARY KEY - this is what you access when you are looking for things and should always be unique.
+// VARCHAR - allows you to have can different types of data up to a specific length.
+// UNIQUE - means has to be the only one. 
+
+CREATE TABLE login (
+  ID serial NOT NULL PRIMARY KEY,
+  SECRET VARCHAR (100) NOT NULL,
+  name text UNIQUE NOT NULL
+)
+// don't have to have ID because it will auto increment now.
+INSERT INTO login (secret, name) VALUES ('abc', 'Erik');
+INSERT INTO login (secret, name) VALUES ('xyz', 'Sally');
+INSERT INTO login (secret, name) VALUES ('lol', 'John');
+*/
+
+// JOINING TABLES - Primary and Foreign Keys - CONNECTING TABLES
+// now we have two tables users and login
+// name is the primary key in users and is a foreign key in login. By joining in this way we combine the tables based on name so get all the data from both tables together which is the power of relational db's
+
+SELECT * FROM users JOIN login ON users.name = login.name;
+
+
+// DELETE
+DELETE FROM tablename WHERE column_1 = value;
+
+ex DELETE FROM users WHERE name='Sally';
+
+remove a table...
+
+DROP TABLE table_name;
+
+
+
+\h - help with SQL commands
+\? - help wiht psql commands
+\d - to view table in terminal
+\q - exit back to terminal
+

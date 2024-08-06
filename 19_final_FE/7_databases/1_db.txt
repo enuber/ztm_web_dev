@@ -1,0 +1,33 @@
+a database is a collection of data
+
+can store and organize data that is useful. 
+
+Database Management System - collection of programs that allows us to access databases and work with data. Allows control access to database users.
+
+
+Relational Database -  (PostgreSQL, MySQL, MariaDB, SQLite)
+  consist of two or more tables with columns and rows. 
+
+  a row represents an entry and a column sorts a very specific type of information
+
+  the relation between tables is called a SCHEMA. The schema needs to be defined before data is placed.
+
+  Primary Key: Something that identifies each row is called the primary key. Like ID, Create_At, Full_Name
+
+  Foreign Key: if two tables have a common element like username, it is a foreign key where username in one table is the foreign key for another table. 
+
+SQL - allows you to communicate from database to the server. 
+
+for relational DB's, files would be like "users" "tweets" "profiles" and you use foreign keys to relate to one another to grab info. So if you have a user with an ID and username, you can look at tweets by the username in another file, and, then from ID see who is following that ID...
+
+a realional db table organizes structured data fields into defined columns.
+
+
+Non Relational Database or NoSQL (MongoDB, Cassandra, Redis, Apache HBase, Hypertable, Apache CouchDB)
+don't have to define the schema first. Good for unstructured data, has greater flexibility. 
+
+does not incorporate the table model, instead data is stored in a single document file. 
+
+For this, each user is a separate file that contains all the info about that user. 
+
+uses for example MongoDB query language to talk to server so not same as SQL.
