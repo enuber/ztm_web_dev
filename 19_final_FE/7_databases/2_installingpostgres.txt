@@ -1,6 +1,6 @@
 use a gui for postgreSQL
 
-go to www.psequel.com
+using pgAdmin4 for GUI
 
 install with brew
 
@@ -110,6 +110,11 @@ ex DELETE FROM users WHERE name='Sally';
 remove a table...
 
 DROP TABLE table_name;
+
+DROP database
+
+dropdb <databasename>
+
 
 
 

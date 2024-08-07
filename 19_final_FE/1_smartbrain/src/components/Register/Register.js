@@ -5,10 +5,11 @@ class Register extends React.Component {
     email: '',
     password: '',
     name: '',
+    error: false,
   };
 
   onEmailChange = (evt) => {
-    this.setState({ emial: evt.target.value });
+    this.setState({ email: evt.target.value });
   };
 
   onPasswordChange = (evt) => {
@@ -32,12 +33,28 @@ class Register extends React.Component {
         name: this.state.name,
       }),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.status === 400) {
+          throw new Error('Failed to register');
+        }
+        console.log('res', res);
+        return res.json();
+      })
       .then((user) => {
-        if (user) {
+        console.log('user', user);
+        if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
+          this.setState({ error: false });
         }
+      })
+      .catch((err) => {
+        this.setState({
+          email: '',
+          password: '',
+          name: '',
+          error: true,
+        });
       });
   };
 
@@ -48,6 +65,14 @@ class Register extends React.Component {
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f1 fw6 ph0 mh0">Register</legend>
+              {this.state.error ? (
+                <p className="error">
+                  There was a problem with registering. <br />
+                  You may already have an account
+                </p>
+              ) : (
+                ''
+              )}
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="name">
                   Name
@@ -58,6 +83,7 @@ class Register extends React.Component {
                   type="text"
                   name="name"
                   id="name"
+                  value={this.state.name}
                 />
               </div>
               <div className="mt3">
@@ -70,6 +96,7 @@ class Register extends React.Component {
                   type="email"
                   name="email-address"
                   id="email-address"
+                  value={this.state.email}
                 />
               </div>
               <div className="mv3">
@@ -82,6 +109,7 @@ class Register extends React.Component {
                   type="password"
                   name="password"
                   id="password"
+                  value={this.state.password}
                 />
               </div>
             </fieldset>

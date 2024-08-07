@@ -1,0 +1,20 @@
+// environment variables
+
+have access to variables that are specific for the server 
+running a console log will show the environment.
+
+console.log(process.env)
+
+
+PORT here is made up, it doesn't exist. But it an be defined in the terminal
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
+
+in terminal run
+
+PORT=3000 node server.js
+
+usually environment variables are used to store things that are a secret.

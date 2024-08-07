@@ -1,7 +1,40 @@
-const express = require('express');
-const bcrypt = require('bcrypt-nodejs');
+import express from './node_modules/express/index.js';
+import bcrypt from './node_modules/bcrypt-nodejs/bCrypt.js';
+import cors from './node_modules/cors/lib/index.js';
+import knex from './node_modules/knex/knex.mjs';
+
+// NOTE REMEMBER - have to have  "type": "module", in package.json to import/export
+import { handleRegister } from './controllers/register.js';
+import { handleSignin } from './controllers/signin.js';
+import { handleProfile } from './controllers/profile.js';
+import { handleImage, handleApiCall } from './controllers/image.js';
+
+// const express = require('express');
+// const bcrypt = require('bcrypt-nodejs');
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-const cors = require('cors');
+// const cors = require('cors');
+// const knex = require('knex');
+
+//note that the default here is 127.0.0.1 which is localhost
+//have to fill out all the info, can get user from doing \d in terminal of the database and will show the owner. 3306
+// port 5432 is the port that pg is running on.
+
+const db = knex({
+  client: 'pg',
+  connection: {
+    host: '127.0.0.1',
+    port: 5432,
+    user: 'eriknuber',
+    password: '',
+    database: 'smart-brain',
+  },
+});
+
+// console.log(db.select('*').from('users'));
+
+// db.select('*')
+//   .from('users')
+//   .then((data) => console.log(data));
 
 const app = express();
 //middleware to allow the data coming in to be read.
@@ -9,94 +42,50 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
 
-const database = {
-  users: [
-    {
-      id: '123',
-      name: 'John',
-      email: 'john@gmail.com',
-      password: 'cookies',
-      entries: 0,
-      joined: new Date(),
-    },
-    {
-      id: '124',
-      name: 'Sally',
-      email: 'sally@gmail.com',
-      password: 'bananas',
-      entries: 0,
-      joined: new Date(),
-    },
-  ],
-  login: [
-    {
-      id: '987',
-      hash: '',
-      email: 'john@gmail.com',
-    },
-  ],
-};
+// const database = {
+//   users: [
+//     {
+//       id: '123',
+//       name: 'John',
+//       email: 'john@gmail.com',
+//       password: 'cookies',
+//       entries: 0,
+//       joined: new Date(),
+//     },
+//     {
+//       id: '124',
+//       name: 'Sally',
+//       email: 'sally@gmail.com',
+//       password: 'bananas',
+//       entries: 0,
+//       joined: new Date(),
+//     },
+//   ],
+//   login: [
+//     {
+//       id: '987',
+//       hash: '',
+//       email: 'john@gmail.com',
+//     },
+//   ],
+// };
 
 app.get('/', (req, res) => {
-  res.send(database.users);
+  // res.send(database.users);
+  res.send('success');
 });
 
 //instead of using res.send() express comes with built JSOn method called res.json(). Can still send JSON using res.send(). Slight difference in what is received. When you send the request it goes through as a JSON string not just a string
-app.post('/signin', (req, res) => {
-  if (
-    req.body.email === database.users[0].email &&
-    req.body.password === database.users[0].password
-  ) {
-    res.json(database.users[0]);
-  } else {
-    res.status(400).json('error loggin in');
-  }
-});
+app.post('/signin', (req, res) => handleSignin(req, res, db, bcrypt));
 
-app.post('/register', (req, res) => {
-  const { email, name, password } = req.body;
-  // in the register when you
-
-  database.users.push({
-    id: '125',
-    name: name,
-    email: email,
-    password: password,
-    entries: 0,
-    joined: new Date(),
-  });
-  res.json(database.users[database.users.length - 1]);
-});
+app.post('/register', (req, res) => handleRegister(req, res, db, bcrypt));
 
 //the :id means we can put anything in the url and be able to grab this ID through the request.params property
-app.get('/profile/:id', (req, res) => {
-  const { id } = req.params;
-  let found = false;
-  database.users.forEach((user) => {
-    if (user.id === id) {
-      found = true;
-      return res.json(user);
-    }
-  });
-  if (!found) {
-    res.status(400).json('no such user');
-  }
-});
+app.get('/profile/:id', (req, res) => handleProfile(req, res, db));
 
-app.put('/image', (req, res) => {
-  const { id } = req.body;
-  let found = false;
-  database.users.forEach((user) => {
-    if (user.id === id) {
-      found = true;
-      user.entries++;
-      return res.json(user.entries);
-    }
-  });
-  if (!found) {
-    res.status(400).json('no such user');
-  }
-});
+app.put('/image', (req, res) => handleImage(req, res, db));
+
+app.post('/imageurl', (req, res) => handleApiCall(req, res));
 
 //with app.listen() you pass in the port to go to and can have a function attached that can be used for anything
 app.listen(3000, () => {

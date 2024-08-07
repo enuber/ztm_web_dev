@@ -4,6 +4,7 @@ class Signin extends React.Component {
   state = {
     signInEmail: '',
     signInPassword: '',
+    error: false,
   };
 
   onEmailChange = (evt) => {
@@ -15,25 +16,71 @@ class Signin extends React.Component {
   };
 
   //hooking up to the back end. we are sending the info to the correct route at /signin, have to give it the method type which in this case is 'post' then provide headers for content-type and finally the body of info. According to the route it is expecting the email and password so that is what we are sending. Finally, we are checking on the info and, if it is correct we show the home page. Should also be doing something if the login is unsuccesful beyond staying on the page.
-  onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword,
-      }),
-    })
-      .then((res) => res.json())
-      .then((user) => {
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange('home');
-        }
+
+  onSubmitSignIn = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/signin', {
+        method: 'post',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.signInEmail,
+          password: this.state.signInPassword,
+        }),
       });
+
+      if (response.status === 400) {
+        throw new Error('Failed to sign in');
+      }
+
+      const user = await response.json();
+
+      if (user.id) {
+        this.props.loadUser(user);
+        this.props.onRouteChange('home');
+        this.setState({ error: false });
+      }
+    } catch (err) {
+      this.setState({
+        signInPassword: '',
+        error: true,
+      });
+    }
   };
+
+  // onSubmitSignIn = () => {
+  //   fetch('http://localhost:3000/signin', {
+  //     method: 'post',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       email: this.state.signInEmail,
+  //       password: this.state.signInPassword,
+  //     }),
+  //   })
+  //     .then((res) => {
+  //       if (res.status === 400) {
+  //         throw new Error('Failed to signin');
+  //       }
+
+  //       return res.json();
+  //     })
+  //     .then((user) => {
+  //       if (user.id) {
+  //         this.props.loadUser(user);
+  //         this.props.onRouteChange('home');
+  //         this.setState({ error: false });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       this.setState({
+  //         signInPassword: '',
+  //         error: true,
+  //       });
+  //     });
+  // };
 
   render() {
     const { onRouteChange } = this.props;
@@ -43,6 +90,11 @@ class Signin extends React.Component {
           <div className="measure">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
               <legend className="f1 fw6 ph0 mh0">Sign In</legend>
+              {this.state.error ? (
+                <p className="error">The email or password was incorrect.</p>
+              ) : (
+                ''
+              )}
               <div className="mt3">
                 <label className="db fw6 lh-copy f6" htmlFor="email-address">
                   Email
@@ -53,6 +105,7 @@ class Signin extends React.Component {
                   type="email"
                   name="email-address"
                   id="email-address"
+                  value={this.state.signInEmail}
                 />
               </div>
               <div className="mv3">
@@ -65,6 +118,7 @@ class Signin extends React.Component {
                   type="password"
                   name="password"
                   id="password"
+                  value={this.state.signInPassword}
                 />
               </div>
             </fieldset>

@@ -10,36 +10,51 @@ import ParticlesBg from 'particles-bg';
 
 import './App.css';
 
-const returnClarafiaRequestOptions = (imgURL) => {
-  const PAT = 'dca58c86145443cb840b66346e8cbc7b';
-  const USER_ID = 'enuber';
-  const APP_ID = 'face-recognition-24';
-  const IMAGE_URL = imgURL;
+// const returnClarafiaRequestOptions = (imgURL) => {
+//   const PAT = 'dca58c86145443cb840b66346e8cbc7b';
+//   const USER_ID = 'enuber';
+//   const APP_ID = 'face-recognition-24';
+//   const IMAGE_URL = imgURL;
 
-  const raw = JSON.stringify({
-    user_app_id: {
-      user_id: USER_ID,
-      app_id: APP_ID,
-    },
-    inputs: [
-      {
-        data: {
-          image: {
-            url: IMAGE_URL,
-          },
-        },
-      },
-    ],
-  });
-  const requestOptions = {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      Authorization: 'Key ' + PAT,
-    },
-    body: raw,
-  };
-  return requestOptions;
+//   const raw = JSON.stringify({
+//     user_app_id: {
+//       user_id: USER_ID,
+//       app_id: APP_ID,
+//     },
+//     inputs: [
+//       {
+//         data: {
+//           image: {
+//             url: IMAGE_URL,
+//           },
+//         },
+//       },
+//     ],
+//   });
+//   const requestOptions = {
+//     method: 'POST',
+//     headers: {
+//       Accept: 'application/json',
+//       Authorization: 'Key ' + PAT,
+//     },
+//     body: raw,
+//   };
+//   return requestOptions;
+// };
+
+const initialState = {
+  input: '',
+  imageURL: '',
+  boxes: [],
+  route: 'signin',
+  isSignedIn: false,
+  user: {
+    email: '',
+    id: '',
+    name: '',
+    entries: 0,
+    joined: '',
+  },
 };
 
 class App extends Component {
@@ -105,13 +120,15 @@ class App extends Component {
   };
 
   onBtnSubmit = () => {
-    const MODEL_ID = 'face-detection';
     this.setState({ imageURL: this.state.input });
-    fetch(
-      `https://api.clarifai.com/v2/models/${MODEL_ID}/outputs`,
-      returnClarafiaRequestOptions(this.state.input)
-    )
-      .then((response) => response.json())
+    fetch(`http://localhost:3000/imageurl`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ input: this.state.input }),
+    })
+      .then((res) => {
+        return res.json();
+      })
       .then((data) => {
         if (data) {
           fetch('http://localhost:3000/image', {
@@ -127,7 +144,8 @@ class App extends Component {
                   entries: count,
                 },
               }));
-            });
+            })
+            .catch((error) => console.log('error', error));
         }
         this.displayFaceBox(this.calculateFaceLocation(data));
       })
@@ -136,7 +154,7 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState({ isSignedIn: false });
+      this.setState(initialState);
     } else if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
